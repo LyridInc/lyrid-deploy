@@ -1,0 +1,28 @@
+name: 'Lyrid Deploy'
+description: 'Deploy app on Lyrid'
+inputs:
+  lyrid-key:  
+    description: 'Lyrid Access Key'
+    required: true
+  lyrid-secret:  
+    description: 'Lyrid Access Secret'
+    required: true
+  lyrid-url:  
+    description: 'Lyrid Access Secret'
+    required: true
+outputs:
+  random-number: 
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps: 
+    - run: rm -rf ~/.lc || true
+      shell: bash
+    - run: lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+      shell: bash
+    - run: lc code submit
+      shell: bash
