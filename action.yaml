@@ -22,7 +22,7 @@ runs:
   steps: 
     - run: rm -rf ~/.lc || true
       shell: bash
-    - run: sudo ${{ github.action_path }}/install.sh
+    - run: sudo bash ${{ github.action_path }}/install.sh
       shell: bash
     - run: lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
       shell: bash
