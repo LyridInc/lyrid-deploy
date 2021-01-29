@@ -1,4 +1,7 @@
 name: 'Lyrid Deploy'
+branding:
+  icon: 'airplay'  
+  color: 'green'
 description: 'Deploy app on Lyrid'
 inputs:
   lyrid-key:  
