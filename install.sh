@@ -182,5 +182,5 @@ if ! checkLCInstalledVersion; then
   downloadFile
   installFile
 fi
-testVersion
+#testVersion
 cleanup
