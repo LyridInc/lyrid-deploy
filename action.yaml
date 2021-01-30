@@ -26,10 +26,10 @@ runs:
        sudo rm -rf $(which lc) || true
        sudo bash ${{ github.action_path }}/install.sh 
        ls -lart
-       sudo lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
-       sudo lc config list 
-       sudo cat ~/.lc/.config.json
-       sudo lc code submit
+       lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
+       lc config list 
+       cat ~/.lc/.config.json
+       lc code submit
       shell: bash
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
