@@ -28,6 +28,8 @@ runs:
        ls -lart
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc config list 
+       lc user info
+       curl -kv https://api.staging01.lyrid.io/version
        cat ~/.lc/.config.json
        lc code submit
       shell: bash
