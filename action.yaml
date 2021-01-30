@@ -28,6 +28,7 @@ runs:
        ls -lart
        sudo lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        sudo lc config list 
+       sudo cat ~/.lc/.config.json
        sudo lc code submit
       shell: bash
     - id: random-number-generator
