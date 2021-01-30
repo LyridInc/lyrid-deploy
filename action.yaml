@@ -22,12 +22,13 @@ runs:
   steps: 
     - run: rm -rf ~/.lc || true
       shell: bash
-    - run: sudo bash ${{ github.action_path }}/install.sh
-      shell: bash
-    - run: lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }} || true
+    - run: |
+       sudo bash ${{ github.action_path }}/install.sh 
+       ls -lart
+       lc --help
+       lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
+       lc code submit
       shell: bash
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: lc code submit
       shell: bash
