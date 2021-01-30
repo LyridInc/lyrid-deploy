@@ -102,10 +102,10 @@ downloadFile() {
 
   if type "curl" > /dev/null; then
     curl -SsL "$DOWNLOAD_URL" -o "$LC_TMP_FILE"
-    chmod 700 "$LC_TMP_FILE"
+    chmod 777 "$LC_TMP_FILE"
   elif type "wget" > /dev/null; then
     wget -q -O "$LC_TMP_FILE" "$DOWNLOAD_URL"
-    chmod 700 "$LC_TMP_FILE"
+    chmod 777 "$LC_TMP_FILE"
   fi
 }
 
