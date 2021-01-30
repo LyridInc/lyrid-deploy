@@ -111,7 +111,7 @@ downloadFile() {
 
 installFile() {
   runAsRoot cp "$LC_TMP_FILE" "$LC_INSTALL_DIR"
-  echo "$PROJECT_NAME installed into $HELM_INSTALL_DIR/$PROJECT_NAME"
+  echo "$PROJECT_NAME installed into $LC_INSTALL_DIR/$PROJECT_NAME"
 }
 
 fail_trap() {
