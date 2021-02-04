@@ -2,7 +2,7 @@
 A GitHub Action for deploying on Lyrid Serverless Platform
 
 ## Basic Example
-In this example you must have a lyrid defination file (.lyrid-definition.yml) in the project directory and create the following file (.github/workflows/main.yml)
+In this example you must have a lyrid definition file (.lyrid-definition.yml) in the project directory and create the following file (.github/workflows/main.yml)
 
 ```yaml
 name: Deploy
