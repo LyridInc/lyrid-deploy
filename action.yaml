@@ -1,7 +1,7 @@
 name: 'Lyrid Deploy'
 branding:
   icon: 'airplay'  
-  color: 'green'
+  color: 'gray-dark'
 description: 'Deploy app on Lyrid'
 inputs:
   lyrid-key:  
@@ -13,10 +13,7 @@ inputs:
   lyrid-url:  
     description: 'Lyrid Access Secret'
     required: true
-outputs:
-  random-number: 
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+    default: 'https://api.lyrid.io'
 runs:
   using: "composite"
   steps: 
@@ -25,14 +22,7 @@ runs:
     - run: |
        sudo rm -rf $(which lc) || true
        sudo bash ${{ github.action_path }}/install.sh 
-       ls -lart
-       curl -kv https://api.staging01.lyrid.io/version
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
-       lc config list 
        lc user info
-       cat ~/.lc/.config.json
        lc code submit
-      shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
