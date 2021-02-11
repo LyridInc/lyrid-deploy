@@ -88,13 +88,13 @@ checkLCInstalledVersion() {
 
 downloadFile() {
   if [[ "$OS" == "darwin" ]] ; then
-    DOWNLOAD_URL="https://api.lyrid.io/client/dl/mac"
+    DOWNLOAD_URL="https://api.staging01.lyrid.io/client/dl/mac"
   fi
   if [[ "$OS" == "linux" ]] ;  then
-    DOWNLOAD_URL="https://api.lyrid.io/client/dl/linux"
+    DOWNLOAD_URL="https://api.staging01.lyrid.io/client/dl/linux"
   fi
   if [[ "$OS" == "windows" ]] ;  then 
-    DOWNLOAD_URL="https://api.lyrid.io/client/dl/win"
+    DOWNLOAD_URL="https://api.staging01.lyrid.io/client/dl/win"
   fi
   LC_TMP_ROOT="$(mktemp -dt lc-installer-XXXXXX)"
   LC_TMP_FILE="$LC_TMP_ROOT/$PROJECT_NAME"
