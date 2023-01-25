@@ -11,18 +11,41 @@ inputs:
     description: 'Lyrid Access Secret'
     required: true
   lyrid-url:  
-    description: 'Lyrid Access Secret'
+    description: 'Lyrid URL'
     required: true
     default: 'https://api.lyrid.io'
+  instanceid:
+    description: 'Deploy to specific cluster. Input your UniqueInstanceID. (ex: a1b2c3d4)'
+    default: ''
+  instancetag:
+    description: 'Deploy to several cluster according to tag'
+    default: ''
+  regionid:
+    description: 'Deploy to specific RegionID. if no deployment strategy is found, defaulted to (uswest1)'
+    default: ''
+  distributed:
+    description: 'Enable distributed deployment'
+    default: ''
 runs:
   using: "composite"
   steps: 
     - run: rm -rf ~/.lc || true
       shell: bash
-    - run: |
+    - name: Deploying to Lyrid Platform
+      run: |
        sudo rm -rf $(which lc) || true
        sudo bash ${{ github.action_path }}/install.sh 
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc user info
-       lc code submit
+       if [[ ${{ github.event.inputs.instanceid }} != '' ]]; then
+         lc code submit -i ${{ github.event.inputs.instanceid }}
+       elif [[ ${{ github.event.inputs.instancetag }} != '' ]]; then
+         lc code submit --itag ${{ github.event.inputs.instancetag }}
+       elif [[ ${{ github.event.inputs.regionid }} != '' ]]; then
+         lc code submit --rid ${{ github.event.inputs.regionid }}
+       elif [[ ${{ github.event.inputs.distributed }} == 'true' ]]; then
+         lc code submit -d
+       else
+         lc code submit
+       fi
       shell: bash
