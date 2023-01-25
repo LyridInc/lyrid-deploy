@@ -1,5 +1,5 @@
 # lyrid-deploy
-A GitHub Action for deploying on Lyrid Serverless Platform
+A GitHub Action for deploying an application to Lyrid Serverless Platform
 
 ## Basic Example
 In this example you must have a lyrid definition file (.lyrid-definition.yml) in the project directory and create the following file (.github/workflows/main.yml)
@@ -17,23 +17,14 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: LyridInc/lyrid-deploy@v0.1.1 # This is the action
+      - uses: LyridInc/lyrid-deploy@v0.2.0 # This is the action
         with:
           lyrid-key: ${{secrets.LYRID_API_KEY}}
           lyrid-secret: ${{secrets.LYRID_API_SECRET}}
 ```
 
-instanceid:
-    description: 'Deploy to specific cluster. Input your UniqueInstanceID. (ex: a1b2c3d4)'
-    default: ''
-  regionid:
-    description: 'Deploy to specific RegionID. if no deployment strategy is found, defaulted to (uswest1)'
-    default: ''
-  distributed:
-    description: 'Enable distributed deployment'
-    default: ''
 ## Options
-You can configure the deploy to heroku passing some options to the action
+You can configure the deploy to Lyrid passing some options to the action
 
 | Name            | Type     | Description                                                                                                                                  | Example                                              | Required | Default         |
 |-----------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|----------|-----------------|
