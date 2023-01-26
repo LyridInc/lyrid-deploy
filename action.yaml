@@ -38,14 +38,19 @@ runs:
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc user info
        if [[ ${{ github.event.inputs.instanceid }} != '' ]]; then
+         echo instanceid ${{ github.event.inputs.instanceid }}
          lc code submit -i ${{ github.event.inputs.instanceid }}
        elif [[ ${{ github.event.inputs.instancetag }} != '' ]]; then
+         echo instancetag ${{ github.event.inputs.instancetag }}
          lc code submit --itag ${{ github.event.inputs.instancetag }}
        elif [[ ${{ github.event.inputs.regionid }} != '' ]]; then
+         echo regionid ${{ github.event.inputs.regionid }}
          lc code submit --rid ${{ github.event.inputs.regionid }}
        elif [[ ${{ github.event.inputs.distributed }} == 'true' ]]; then
+         echo distributed true
          lc code submit -d
        else
+         echo default
          lc code submit
        fi
       shell: bash
