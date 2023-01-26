@@ -47,7 +47,7 @@ runs:
          echo "regionid ${{ github.event.inputs.regionid }}"
          lc code submit --rid ${{ github.event.inputs.regionid }}
        else
-         echo default
+         echo "default"
          lc code submit
        fi
       shell: bash
