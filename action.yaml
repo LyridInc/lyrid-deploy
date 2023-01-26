@@ -37,17 +37,17 @@ runs:
        sudo bash ${{ github.action_path }}/install.sh 
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc user info
-       echo "instanceid ${{ inputs.instanceid }}"
-       echo "instancetag ${{ inputs.instancetag }}"
-       echo "regionid ${{ inputs.regionid }}"
-       echo "distributed ${{ inputs.distributed }}"
-       if [[ ${{ inputs.instanceid }} != '' ]]; then
+       instanceid=${{ inputs.instanceid }}
+       instancetag=${{ inputs.instancetag }}
+       regionid=${{ inputs.regionid }}
+       distributed=${{ inputs.distributed }}
+       if [[ -z "${instanceid// }" ]]; then
          lc code submit -i ${{ inputs.instanceid }}
-       elif [[ ${{ inputs.instancetag }} != '' ]]; then
+       elif [[ -z "${instancetag// }" ]]; then
          lc code submit --itag ${{ inputs.instancetag }}
-       elif [[ ${{ inputs.regionid }} != '' ]]; then
+       elif [[ -z "${regionid// }" ]]; then
          lc code submit --rid ${{ inputs.regionid }}
-       elif [[ ${{ inputs.distributed }} == true ]]; then
+       elif [[ "$distributed" == true ]]; then
          lc code submit -d
        else
          lc code submit
