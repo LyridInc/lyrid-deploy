@@ -39,13 +39,7 @@ runs:
        lc user info
        if [[ ${{ github.event.inputs.instanceid }} != '' ]]; then
          lc code submit -i ${{ github.event.inputs.instanceid }}
-       elif [[ ${{ github.event.inputs.instancetag }} != '' ]]; then
-         lc code submit --itag ${{ github.event.inputs.instancetag }}
-       elif [[ ${{ github.event.inputs.regionid }} != '' ]]; then
-         lc code submit --rid ${{ github.event.inputs.regionid }}
-       elif [[ ${{ github.event.inputs.distributed }} == 'true' ]]; then
-         lc code submit -d
        else
-         lc code submit
+         echo "hehehe default"
        fi
       shell: bash
