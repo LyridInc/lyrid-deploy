@@ -37,9 +37,4 @@ runs:
        sudo bash ${{ github.action_path }}/install.sh 
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc user info
-       if [[ ${{ github.event.inputs.instanceid }} != '' ]]; then
-         lc code submit -i ${{ github.event.inputs.instanceid }}
-       else
-         echo "hehehe default"
-       fi
       shell: bash
