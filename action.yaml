@@ -41,11 +41,11 @@ runs:
        instancetag=${{ inputs.instancetag }}
        regionid=${{ inputs.regionid }}
        distributed=${{ inputs.distributed }}
-       if [[ -z "${instanceid// }" ]]; then
+       if [[ ! -z "${instanceid// }" ]]; then
          lc code submit -i ${{ inputs.instanceid }}
-       elif [[ -z "${instancetag// }" ]]; then
+       elif [[ ! -z "${instancetag// }" ]]; then
          lc code submit --itag ${{ inputs.instancetag }}
-       elif [[ -z "${regionid// }" ]]; then
+       elif [[ ! -z "${regionid// }" ]]; then
          lc code submit --rid ${{ inputs.regionid }}
        elif [[ "$distributed" == true ]]; then
          lc code submit -d
