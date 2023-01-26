@@ -25,7 +25,7 @@ inputs:
     default: ''
   distributed:
     description: 'Enable distributed deployment'
-    default: ''
+    default: false
 runs:
   using: "composite"
   steps: 
@@ -37,15 +37,24 @@ runs:
        sudo bash ${{ github.action_path }}/install.sh 
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc user info
-       if [[ ${{ github.event.inputs.instanceid }} != '' ]]; then
-         lc code submit -i ${{ github.event.inputs.instanceid }}
-       elif [[ ${{ github.event.inputs.instancetag }} != '' ]]; then
-         lc code submit --itag ${{ github.event.inputs.instancetag }}
-       elif [[ ${{ github.event.inputs.regionid }} != '' ]]; then
-         lc code submit --rid ${{ github.event.inputs.regionid }}
-       elif [[ ${{ github.event.inputs.distributed }} == 'true' ]]; then
+       instanceid=${{ inputs.instanceid }}
+       instancetag=${{ inputs.instancetag }}
+       regionid=${{ inputs.regionid }}
+       distributed=${{ inputs.distributed }}
+       if [[ ! -z "${instanceid// }" ]]; then
+         echo "instanceid deploy $instanceid"
+         lc code submit -i ${{ inputs.instanceid }}
+       elif [[ ! -z "${instancetag// }" ]]; then
+         echo "instancetag deploy $instancetag"
+         lc code submit --itag ${{ inputs.instancetag }}
+       elif [[ ! -z "${regionid// }" ]]; then
+         echo "regionid deploy $regionid"
+         lc code submit --rid ${{ inputs.regionid }}
+       elif [[ "$distributed" == true ]]; then
+         echo "distrbuted deploy $distributed"
          lc code submit -d
        else
+         echo "default deployment"
          lc code submit
        fi
       shell: bash

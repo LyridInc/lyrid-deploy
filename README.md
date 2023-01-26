@@ -21,6 +21,10 @@ jobs:
         with:
           lyrid-key: ${{secrets.LYRID_API_KEY}}
           lyrid-secret: ${{secrets.LYRID_API_SECRET}}
+          #instanceid: a1b2c3d4
+          #instancetag: productioncluster
+          #regionid: apsoutheast1
+          #distributed: true
 ```
 
 ## Options
