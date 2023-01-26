@@ -46,9 +46,6 @@ runs:
        elif [[ ${{ github.event.inputs.regionid }} != '' ]]; then
          echo "regionid ${{ github.event.inputs.regionid }}"
          lc code submit --rid ${{ github.event.inputs.regionid }}
-       elif [ ${{ github.event.inputs.distributed }} = true ]; then
-         echo "distributed true"
-         lc code submit -d
        else
          echo default
          lc code submit
