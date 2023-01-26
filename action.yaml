@@ -25,7 +25,7 @@ inputs:
     default: ''
   distributed:
     description: 'Enable distributed deployment'
-    default: ''
+    default: false
 runs:
   using: "composite"
   steps: 
@@ -37,4 +37,19 @@ runs:
        sudo bash ${{ github.action_path }}/install.sh 
        lc config add --config lyrid_github --key ${{ inputs.lyrid-key }} --secret ${{ inputs.lyrid-secret }} --url ${{ inputs.lyrid-url }}
        lc user info
+       echo "instanceid ${{ github.event.inputs.instanceid }}"
+       echo "instancetag ${{ github.event.inputs.instancetag }}"
+       echo "regionid ${{ github.event.inputs.regionid }}"
+       echo "distributed ${{ github.event.inputs.distributed }}"
+       if [[ ${{ github.event.inputs.instanceid }} != '' ]]; then
+         lc code submit -i ${{ github.event.inputs.instanceid }}
+       elif [[ ${{ github.event.inputs.instancetag }} != '' ]]; then
+         lc code submit --itag ${{ github.event.inputs.instancetag }}
+       elif [[ ${{ github.event.inputs.regionid }} != '' ]]; then
+         lc code submit --rid ${{ github.event.inputs.regionid }}
+       elif [[ ${{ github.event.inputs.distributed }} == 'true' ]]; then
+         lc code submit -d
+       else
+         lc code submit
+       fi
       shell: bash
