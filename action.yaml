@@ -42,14 +42,19 @@ runs:
        regionid=${{ inputs.regionid }}
        distributed=${{ inputs.distributed }}
        if [[ ! -z "${instanceid// }" ]]; then
+         echo "instanceid deploy $instanceid"
          lc code submit -i ${{ inputs.instanceid }}
        elif [[ ! -z "${instancetag// }" ]]; then
+         echo "instancetag deploy $instancetag"
          lc code submit --itag ${{ inputs.instancetag }}
        elif [[ ! -z "${regionid// }" ]]; then
+         echo "regionid deploy $regionid"
          lc code submit --rid ${{ inputs.regionid }}
        elif [[ "$distributed" == true ]]; then
+         echo "distrbuted deploy $distributed"
          lc code submit -d
        else
+         echo "default deployment"
          lc code submit
        fi
       shell: bash
